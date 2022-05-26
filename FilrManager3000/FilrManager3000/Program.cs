@@ -9,8 +9,8 @@ namespace FileManager3000
 	public class ExtensionStatistics
 	{
 		public string Name { get; set; }
-		public long Count { get; set; }
-		public long Sum { get; set; }
+		public static long Count { get; set; }
+		public static long Sum { get; set; }
 
 		public ExtensionStatistics(string name, long count, long sum)
 		{
@@ -40,6 +40,8 @@ namespace FileManager3000
 					var stat = new ExtensionStatistics(d, filesCount, filesSum);
 					statistics.Add(stat);
 				});
+
+				PrintFileTable(files);
 			}
 			
 			var trimmedExtensions = extension.Split(Separator).Select(x => x.Trim()).ToList();
@@ -120,19 +122,6 @@ namespace FileManager3000
 			Console.WriteLine("\n File Table: \n");
 			Console.WriteLine(fileTable.ToString());
 			Console.ResetColor();
-			Environment.Exit(0);
-		}
-
-		private static void PrintExtensionsTable(List<FileInfo> extensions)
-		{
-			ColumnHeader[] extensionsTableHeaders = new[]
-			{
-				new ColumnHeader("Extension Name", Alignment.Center, Alignment.Center),
-				new ColumnHeader("Files with Extension", Alignment.Right, Alignment.Center),
-				new ColumnHeader("Total Size of Files", Alignment.Right, Alignment.Center)
-			};
-
-			var extensionsTable = new Table 
 		}
 	}
 }
